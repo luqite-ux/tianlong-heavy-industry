@@ -40,7 +40,7 @@ export async function submitInquiry(input: InquiryInput) {
       `Product Interest: ${input.interest}`,
       `Source Path: ${input.sourcePath || "/"}`
     ].join("\n"),
-    status: "new"
+    status: "unread"
   });
 
   if (error) {

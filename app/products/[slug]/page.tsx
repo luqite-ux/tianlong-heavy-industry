@@ -4,15 +4,18 @@ import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { InquiryForm } from "@/components/inquiry-form";
 import { SectionHeading } from "@/components/section-heading";
-import { productFamilies } from "@/lib/site-data";
+import { getProductBySlug, getProducts } from "@/lib/products-db";
 
-export function generateStaticParams() {
-  return productFamilies.map((product) => ({ slug: product.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const products = await getProducts();
+  return products.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = productFamilies.find((item) => item.slug === slug);
+  const product = await getProductBySlug(slug);
   return {
     title: product?.title || "Product",
     description: product?.summary
@@ -21,14 +24,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = productFamilies.find((item) => item.slug === slug);
+  const products = await getProducts();
+  const product = products.find((item) => item.slug === slug);
 
   if (!product) {
     notFound();
   }
 
-  const related = productFamilies.filter((item) => item.slug !== product.slug).slice(0, 3);
+  const related = products.filter((item) => item.slug !== product.slug).slice(0, 3);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tianlong-heavy-industry.vercel.app";
+  const imageUrl = product.image.startsWith("http") ? product.image : `${siteUrl}${product.image}`;
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -37,7 +42,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       "@type": "Brand",
       name: "TIANLONG"
     },
-    image: `${siteUrl}${product.image}`,
+    image: imageUrl,
     description: product.summary,
     category: "Foundry machinery",
     model: product.eyebrow

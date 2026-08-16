@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { productFamilies } from "@/lib/site-data";
+import type { ProductFamilyView } from "@/lib/products-db";
 
-type ProductFamily = (typeof productFamilies)[number];
-
-export function ProductCard({ product }: { product: ProductFamily }) {
+export function ProductCard({ product }: { product: ProductFamilyView }) {
   const Icon = product.icon;
 
   return (

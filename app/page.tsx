@@ -4,9 +4,14 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { MotionHero } from "@/components/motion-hero";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
-import { capabilityCards, company, faqItems, galleryImages, lineFlow, metrics, productFamilies } from "@/lib/site-data";
+import { getProducts } from "@/lib/products-db";
+import { capabilityCards, company, faqItems, galleryImages, lineFlow, metrics } from "@/lib/site-data";
 
-export default function HomePage() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const products = await getProducts();
+
   return (
     <>
       <section className="industrial-grid overflow-hidden px-5 py-12 md:py-18 lg:px-8">
@@ -51,7 +56,7 @@ export default function HomePage() {
             body="Tianlong groups equipment around molding, sand preparation, and complete line support, helping buyers discuss the right system instead of a single isolated machine."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {productFamilies.map((product) => (
+            {products.map((product) => (
               <ProductCard key={product.slug} product={product} />
             ))}
           </div>

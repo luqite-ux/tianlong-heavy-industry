@@ -1,10 +1,13 @@
 import type { MetadataRoute } from "next";
-import { productFamilies } from "@/lib/site-data";
+import { getProducts } from "@/lib/products-db";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 60;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
   const routes = ["/", "/products", "/solutions", "/about", "/manufacturing", "/quality", "/projects", "/faq", "/contact"];
-  const productRoutes = productFamilies.map((product) => `/products/${product.slug}`);
+  const products = await getProducts();
+  const productRoutes = products.map((product) => `/products/${product.slug}`);
 
   return [...routes, ...productRoutes].map((route) => ({
     url: `${baseUrl}${route}`,

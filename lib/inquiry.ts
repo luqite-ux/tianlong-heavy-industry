@@ -32,10 +32,14 @@ export async function submitInquiry(input: InquiryInput) {
     company: input.company,
     email: input.email,
     phone: input.phone,
-    country: input.country,
-    product_interest: input.interest,
-    message: input.message,
-    source_path: input.sourcePath || "/",
+    subject: input.interest,
+    message: [
+      input.message,
+      "",
+      `Country / Region: ${input.country}`,
+      `Product Interest: ${input.interest}`,
+      `Source Path: ${input.sourcePath || "/"}`
+    ].join("\n"),
     status: "new"
   });
 

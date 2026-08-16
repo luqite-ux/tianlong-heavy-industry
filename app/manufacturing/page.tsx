@@ -14,6 +14,7 @@ export default function ManufacturingPage() {
         <SectionHeading
           eyebrow="Manufacturing"
           title="Workshop resources for automated foundry machinery"
+          titleAs="h1"
           body="Tianlong combines factory space, production equipment, technical staff, and practical installation experience to support custom foundry equipment projects."
         />
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">

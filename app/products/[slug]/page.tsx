@@ -28,9 +28,27 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   }
 
   const related = productFamilies.filter((item) => item.slug !== product.slug).slice(0, 3);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tianlong-heavy-industry.vercel.app";
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    brand: {
+      "@type": "Brand",
+      name: "TIANLONG"
+    },
+    image: `${siteUrl}${product.image}`,
+    description: product.summary,
+    category: "Foundry machinery",
+    model: product.eyebrow
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <section className="industrial-grid px-5 py-14 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
@@ -101,7 +119,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       <section id="inquiry" className="bg-gradient-to-br from-blue-50 via-white to-red-50/40 px-5 py-16 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionHeading eyebrow="Inquiry" title="Share your project requirement" body="Tianlong can discuss model selection, line matching, and production layout based on your foundry process." />
+          <SectionHeading eyebrow="Inquiry" title="Share your project requirements" body="Tianlong can discuss model selection, line matching, and production layout based on your foundry process." />
           <InquiryForm interest={product.title} />
         </div>
       </section>

@@ -14,6 +14,7 @@ export default function ProductsPage() {
         <SectionHeading
           eyebrow="Products"
           title="Foundry machinery organized by production system"
+          titleAs="h1"
           body="Explore Tianlong equipment by machine family and production line role. Each product path leads to a project inquiry rather than a shopping workflow."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">

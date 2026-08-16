@@ -15,6 +15,7 @@ export default function SolutionsPage() {
         <SectionHeading
           eyebrow="Solutions"
           title="Automated foundry line planning from machine to workflow"
+          titleAs="h1"
           body="Tianlong supports project discussions around each production stage so overseas buyers can match equipment choices with a practical workshop layout."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">

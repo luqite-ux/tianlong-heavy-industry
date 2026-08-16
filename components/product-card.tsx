@@ -9,7 +9,7 @@ export function ProductCard({ product }: { product: ProductFamily }) {
 
   return (
     <article className="group overflow-hidden rounded-[8px] border border-blue-100 bg-white shadow-lift">
-      <div className="relative aspect-[1.35] overflow-hidden bg-brand-sky">
+      <Link href={`/products/${product.slug}`} className="relative block aspect-[1.35] overflow-hidden bg-brand-sky" aria-label={`View ${product.title}`}>
         <Image
           src={product.image}
           alt={product.title}
@@ -17,13 +17,17 @@ export function ProductCard({ product }: { product: ProductFamily }) {
           sizes="(min-width: 1024px) 33vw, 100vw"
           className="object-cover transition duration-700 group-hover:scale-105"
         />
-      </div>
+      </Link>
       <div className="p-6">
         <div className="flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-blue">
           <Icon size={18} />
           {product.eyebrow}
         </div>
-        <h3 className="mt-4 text-2xl font-semibold tracking-tight text-ink">{product.title}</h3>
+        <h3 className="mt-4 text-2xl font-semibold tracking-tight text-ink">
+          <Link href={`/products/${product.slug}`} className="hover:text-brand-blue">
+            {product.title}
+          </Link>
+        </h3>
         <p className="mt-3 text-sm leading-7 text-steel">{product.summary}</p>
         <div className="mt-5 flex flex-wrap gap-2">
           {product.models.slice(0, 5).map((model) => (

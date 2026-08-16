@@ -15,6 +15,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="About Tianlong"
             title="A Qingdao manufacturer focused on modern foundry automation"
+            titleAs="h1"
             body={`${company.name} was founded in 2021 and is located in Pingdu, Qingdao. The company develops and manufactures automated molding machines, sand treatment equipment, and supporting line systems for foundry production.`}
           />
           <div className="mt-8 grid gap-4 sm:grid-cols-3">

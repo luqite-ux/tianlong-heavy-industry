@@ -14,6 +14,7 @@ export default function QualityPage() {
         <SectionHeading
           eyebrow="Quality"
           title="Clear inspection communication for industrial equipment projects"
+          titleAs="h1"
           body="Tianlong keeps quality discussion focused on process checks, assembly review, available technical documents, and coordinated inspection requirements."
         />
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">

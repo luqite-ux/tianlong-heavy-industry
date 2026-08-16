@@ -57,7 +57,7 @@ export function InquiryForm({ interest = "Foundry machinery project" }: { intere
           required
           rows={5}
           className="rounded-[8px] border border-blue-100 bg-blue-50/45 px-4 py-3 text-sm font-medium text-ink outline-none transition focus:border-brand-blue focus:bg-white"
-          placeholder="Tell us about casting type, expected output, workshop layout, preferred automation level, and destination country."
+          placeholder="Tell us about the casting type, expected output, workshop layout, preferred automation level, and destination country."
         />
       </label>
       <button

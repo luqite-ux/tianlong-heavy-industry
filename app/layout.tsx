@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { company } from "@/lib/site-data";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,21 +26,39 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tianlong-heavy-industry.vercel.app";
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: company.name,
+    alternateName: company.brand,
+    url: siteUrl,
+    logo: `${siteUrl}/assets/logo.png`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Tongli Road 9, Tianzhuang Industrial Park",
+      addressLocality: "Pingdu, Qingdao",
+      addressRegion: "Shandong",
+      addressCountry: "CN"
+    },
+    contactPoint: company.phones.map((phone) => ({
+      "@type": "ContactPoint",
+      telephone: phone,
+      contactType: "sales"
+    }))
+  };
+
   return (
     <html lang="en">
       <body className="min-h-screen font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
       </body>
     </html>
-  );
-}
-
-export function LogoMark({ className = "" }: { className?: string }) {
-  return (
-    <Link href="/" className={`flex items-center gap-3 ${className}`} aria-label="TIANLONG Home">
-      <Image src="/assets/logo.png" alt="TIANLONG" width={190} height={50} className="h-10 w-auto" priority />
-    </Link>
   );
 }

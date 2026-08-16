@@ -15,6 +15,7 @@ export default function ProjectsPage() {
         <SectionHeading
           eyebrow="Projects & Scenes"
           title="Visual proof from factory and equipment scenes"
+          titleAs="h1"
           body="This gallery uses real available Tianlong materials to show factory environment, manufacturing resources, site installation context, and certificates."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2">

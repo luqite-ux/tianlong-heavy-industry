@@ -14,6 +14,7 @@ export default function FaqPage() {
         <SectionHeading
           eyebrow="FAQ"
           title="Questions before starting a foundry machinery inquiry"
+          titleAs="h1"
           body="These answers help buyers prepare project information before technical discussion with Tianlong."
           align="center"
         />

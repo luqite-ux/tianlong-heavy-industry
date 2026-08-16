@@ -15,7 +15,8 @@ export default function ContactPage() {
           <SectionHeading
             eyebrow="Contact"
             title="Send your foundry machinery project inquiry"
-            body="Share your machine model, production target, casting type, workshop condition, and destination country. Tianlong will review the details for technical discussion."
+            titleAs="h1"
+            body="Share your machine model, production target, casting type, workshop layout, and destination country. Tianlong will review the details for technical discussion."
           />
           <div className="mt-8 rounded-[8px] border border-blue-100 bg-white p-6 shadow-lift">
             <h2 className="text-xl font-semibold text-ink">{company.name}</h2>

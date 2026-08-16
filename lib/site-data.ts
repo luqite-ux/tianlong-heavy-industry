@@ -36,12 +36,12 @@ export const navItems = [
 ];
 
 export const metrics = [
-  { value: "18.38", label: "Acres factory area" },
+  { value: "12,250 sqm", label: "Factory floor area" },
   { value: "4", label: "Workshops" },
   { value: "20+", label: "Production machines" },
   { value: "37", label: "Team members" },
   { value: "12", label: "Technical staff" },
-  { value: "3-6 mo", label: "Typical project cycle" }
+  { value: "3-6 mo", label: "Typical production cycle" }
 ];
 
 export const productFamilies = [

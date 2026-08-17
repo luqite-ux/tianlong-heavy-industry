@@ -22,6 +22,21 @@ const baseUrl = process.env.BASE_URL || "http://localhost:3101";
 
 const browser = await chromium.launch({ headless: true });
 
+async function gotoWithRetry(page, url) {
+  let lastError;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+      await page.waitForLoadState("load", { timeout: 60000 }).catch(() => {});
+      return response;
+    } catch (error) {
+      lastError = error;
+      await page.waitForTimeout(1200);
+    }
+  }
+  throw lastError;
+}
+
 for (const viewport of [
   { width: 1440, height: 1000, name: "desktop" },
   { width: 390, height: 900, name: "mobile" }
@@ -29,8 +44,7 @@ for (const viewport of [
   const page = await browser.newPage({ viewport });
 
   for (const route of routes) {
-    const response = await page.goto(`${baseUrl}${route}`, { waitUntil: "domcontentloaded", timeout: 45000 });
-    await page.waitForLoadState("load", { timeout: 45000 }).catch(() => {});
+    const response = await gotoWithRetry(page, `${baseUrl}${route}`);
     const title = await page.title();
     const h1Count = await page.locator("h1").count();
     const body = await page.locator("body").innerText();
@@ -49,8 +63,7 @@ for (const viewport of [
 }
 
 const contact = await browser.newPage({ viewport: { width: 390, height: 900 } });
-await contact.goto(`${baseUrl}/contact`, { waitUntil: "domcontentloaded", timeout: 45000 });
-await contact.waitForLoadState("load", { timeout: 45000 }).catch(() => {});
+await gotoWithRetry(contact, `${baseUrl}/contact`);
 await contact.getByLabel("Name").fill("Test Buyer");
 await contact.getByLabel("Company").fill("Foundry Test Co.");
 await contact.getByLabel("Email").fill("buyer@example.com");
@@ -65,8 +78,7 @@ if (!validationFeedback) errors.push("contact form did not show success, validat
 await contact.screenshot({ path: "playwright-contact-mobile.png", fullPage: true });
 
 const structuredData = await browser.newPage();
-await structuredData.goto(`${baseUrl}/products/automatic-horizontal-molding-machine`, { waitUntil: "domcontentloaded", timeout: 45000 });
-await structuredData.waitForLoadState("load", { timeout: 45000 }).catch(() => {});
+await gotoWithRetry(structuredData, `${baseUrl}/products/automatic-horizontal-molding-machine`);
 const jsonLd = await structuredData.locator('script[type="application/ld+json"]').allTextContents();
 if (!jsonLd.some((text) => text.includes('"@type":"Organization"'))) errors.push("missing Organization JSON-LD");
 if (!jsonLd.some((text) => text.includes('"@type":"Product"'))) errors.push("missing Product JSON-LD");

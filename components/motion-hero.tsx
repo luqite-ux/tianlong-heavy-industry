@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { AnimatedMetric } from "@/components/animated-metric";
 import { metrics } from "@/lib/site-data";
 
 export function MotionHero() {
@@ -41,7 +42,9 @@ export function MotionHero() {
             className="float-slow rounded-[8px] border border-white/80 bg-white/90 p-4 shadow-lift backdrop-blur"
             style={{ animationDelay: `${index * 0.25}s` }}
           >
-            <p className="text-2xl font-black text-brand-blue">{metric.value}</p>
+            <p className="text-2xl font-black text-brand-blue">
+              <AnimatedMetric value={metric.value} />
+            </p>
             <p className="mt-1 text-xs font-semibold text-slate-600">{metric.label}</p>
           </div>
         ))}

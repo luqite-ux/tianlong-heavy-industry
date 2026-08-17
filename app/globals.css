@@ -49,6 +49,63 @@ a {
   animation: reveal-up 0.8s ease both;
 }
 
+.metric-card {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+}
+
+.metric-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 0%, rgba(53, 142, 255, 0.16) 42%, transparent 62%);
+  transform: translateX(-120%);
+  animation: sheen 4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.metric-card:hover {
+  border-color: rgba(21, 59, 145, 0.36);
+  box-shadow: 0 18px 42px rgba(21, 59, 145, 0.14);
+  transform: translateY(-4px);
+}
+
+.process-step {
+  animation: reveal-up 0.72s ease both;
+  animation-delay: var(--step-delay, 0ms);
+  transition: transform 240ms ease, border-color 240ms ease;
+}
+
+.process-step::before {
+  content: "";
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  top: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #153b91, #e51f2f);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: line-grow 1s ease both;
+  animation-delay: calc(var(--step-delay, 0ms) + 160ms);
+}
+
+.process-step:hover {
+  border-color: rgba(229, 31, 47, 0.28);
+  transform: translateY(-3px);
+}
+
+.shadow-lift {
+  transition: box-shadow 260ms ease, transform 260ms ease;
+}
+
+.shadow-lift:hover {
+  box-shadow: 0 18px 42px rgba(21, 59, 145, 0.13);
+}
+
 @keyframes flow-line {
   to {
     stroke-dashoffset: -220;
@@ -72,6 +129,21 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes sheen {
+  0%, 58% {
+    transform: translateX(-120%);
+  }
+  78%, 100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes line-grow {
+  to {
+    transform: scaleX(1);
   }
 }
 

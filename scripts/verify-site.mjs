@@ -58,8 +58,9 @@ await contact.getByLabel("Phone / WhatsApp").fill("+1 555 0100");
 await contact.getByLabel("Country / Region").fill("United States");
 await contact.getByLabel("Project Message").fill("We are evaluating an automated molding line and need model selection support.");
 await contact.getByRole("button", { name: /send inquiry/i }).click();
-await contact.waitForTimeout(1000);
-const validationFeedback = await contact.locator("text=/received|complete all|required|not available|not configured|try again/i").count();
+const feedback = contact.locator("text=/received|complete all|required|not available|not configured|try again/i");
+await feedback.first().waitFor({ state: "visible", timeout: 8000 }).catch(() => {});
+const validationFeedback = await feedback.count();
 if (!validationFeedback) errors.push("contact form did not show success, validation, or error feedback");
 await contact.screenshot({ path: "playwright-contact-mobile.png", fullPage: true });
 

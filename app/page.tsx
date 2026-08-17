@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { MotionHero } from "@/components/motion-hero";
+import { AnimatedMetric } from "@/components/animated-metric";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
 import { getProducts } from "@/lib/products-db";
@@ -40,8 +42,10 @@ export default async function HomePage() {
       <section className="px-5 py-14 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {metrics.map((metric) => (
-            <div key={metric.label} className="rounded-[8px] border border-blue-100 bg-white p-5 shadow-lift">
-              <p className="text-3xl font-black text-brand-blue">{metric.value}</p>
+            <div key={metric.label} className="metric-card rounded-[8px] border border-blue-100 bg-white p-5 shadow-lift">
+              <p className="text-3xl font-black text-brand-blue">
+                <AnimatedMetric value={metric.value} />
+              </p>
               <p className="mt-2 text-sm font-semibold text-steel">{metric.label}</p>
             </div>
           ))}
@@ -72,7 +76,7 @@ export default async function HomePage() {
           />
           <div className="mt-10 grid gap-4 md:grid-cols-7">
             {lineFlow.map((step, index) => (
-              <div key={step} className="relative rounded-[8px] border border-blue-100 bg-gradient-to-br from-white to-blue-50 p-5 shadow-lift">
+              <div key={step} className="process-step relative rounded-[8px] border border-blue-100 bg-gradient-to-br from-white to-blue-50 p-5 shadow-lift" style={{ "--step-delay": `${index * 90}ms` } as CSSProperties}>
                 <p className="text-xs font-black text-brand-red">0{index + 1}</p>
                 <p className="mt-3 text-sm font-bold text-ink">{step}</p>
               </div>

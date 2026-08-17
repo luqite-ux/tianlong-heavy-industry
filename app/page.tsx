@@ -106,8 +106,14 @@ export default async function HomePage() {
               })}
             </div>
           </div>
-          <div className="relative min-h-[520px] overflow-hidden rounded-[8px] shadow-lift">
-            <Image src="/assets/factory-exterior.png" alt="Tianlong factory exterior" fill className="object-cover" />
+          <div className="factory-showcase relative min-h-[520px] overflow-hidden rounded-[8px] border border-white bg-gradient-to-br from-white via-blue-50 to-white p-3 shadow-lift">
+            <Image
+              src="/assets/factory-exterior.png"
+              alt="Tianlong factory exterior with company sign"
+              fill
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              className="object-contain object-left-center"
+            />
           </div>
         </div>
       </section>

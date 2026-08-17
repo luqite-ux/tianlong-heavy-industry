@@ -86,33 +86,31 @@ export default async function HomePage() {
       </section>
 
       <section className="px-5 py-16 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <SectionHeading
-              eyebrow="Manufacturing"
-              title="A practical factory foundation for custom line projects"
-              body="The factory combines workshop capacity, technical staff, PLC design, and machining resources to support modern automated foundry equipment."
-            />
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {capabilityCards.map((card) => {
-                const Icon = card.icon;
-                return (
-                  <div key={card.title} className="rounded-[8px] border border-blue-100 bg-white p-5 shadow-lift">
-                    <Icon className="text-brand-blue" />
-                    <h3 className="mt-4 text-lg font-bold text-ink">{card.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-steel">{card.body}</p>
-                  </div>
-                );
-              })}
-            </div>
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow="Manufacturing"
+            title="A practical factory foundation for custom line projects"
+            body="The factory combines workshop capacity, technical staff, PLC design, and machining resources to support modern automated foundry equipment."
+          />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {capabilityCards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <div key={card.title} className="rounded-[8px] border border-blue-100 bg-white p-5 shadow-lift">
+                  <Icon className="text-brand-blue" />
+                  <h3 className="mt-4 text-lg font-bold text-ink">{card.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-steel">{card.body}</p>
+                </div>
+              );
+            })}
           </div>
-          <div className="factory-showcase relative min-h-[520px] overflow-hidden rounded-[8px] border border-white bg-gradient-to-br from-white via-blue-50 to-white p-3 shadow-lift">
+          <div className="factory-showcase mt-8 relative aspect-[16/7] min-h-[360px] overflow-hidden rounded-[8px] border border-white bg-gradient-to-br from-white via-blue-50 to-white shadow-lift">
             <Image
               src="/assets/factory-exterior.png"
               alt="Tianlong factory exterior with company sign"
               fill
-              sizes="(min-width: 1024px) 52vw, 100vw"
-              className="object-contain object-left-center"
+              sizes="(min-width: 1280px) 1280px, 100vw"
+              className="object-cover object-center"
             />
           </div>
         </div>

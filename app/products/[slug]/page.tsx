@@ -32,7 +32,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   }
 
   const related = products.filter((item) => item.slug !== product.slug).slice(0, 3);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tianlong-heavy-industry.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://htchemmach.com";
   const imageUrl = product.image.startsWith("http") ? product.image : `${siteUrl}${product.image}`;
   const productJsonLd = {
     "@context": "https://schema.org",

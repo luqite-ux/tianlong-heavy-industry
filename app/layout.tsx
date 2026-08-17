@@ -6,7 +6,7 @@ import { company } from "@/lib/site-data";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://tianlong-foundry.example.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://htchemmach.com"),
   title: {
     default: "TIANLONG | Automated Foundry Machinery",
     template: "%s | TIANLONG"
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tianlong-heavy-industry.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://htchemmach.com";
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",

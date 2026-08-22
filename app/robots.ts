@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/admin/", "/login", "/_next/"]
       }
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || "https://htchemmach.com"}/sitemap.xml`
+    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || "https://tlzgmach.com"}/sitemap.xml`
   };
 }

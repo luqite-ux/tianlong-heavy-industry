@@ -9,7 +9,10 @@ export const InquiryInput = z.object({
   country: z.string().min(2),
   interest: z.string().min(2),
   message: z.string().min(10),
-  sourcePath: z.string().optional()
+  sourcePath: z.string().optional(),
+  captchaScope: z.string().max(160),
+  captchaToken: z.string().max(4096),
+  captchaAnswer: z.string().max(16)
 });
 
 export type InquiryInput = z.infer<typeof InquiryInput>;

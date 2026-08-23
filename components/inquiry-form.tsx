@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { InquiryCaptchaField } from "@/components/inquiry-captcha-field";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
 export function InquiryForm({ interest = "Foundry machinery project" }: { interest?: string }) {
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
+  const [captchaRefreshKey, setCaptchaRefreshKey] = useState(0);
 
   async function onSubmit(formData: FormData) {
     setState("submitting");
@@ -20,7 +22,10 @@ export function InquiryForm({ interest = "Foundry machinery project" }: { intere
       country: String(formData.get("country") || ""),
       interest: String(formData.get("interest") || interest),
       message: String(formData.get("message") || ""),
-      sourcePath: window.location.pathname
+      sourcePath: window.location.pathname,
+      captchaScope: String(formData.get("captchaScope") || ""),
+      captchaToken: String(formData.get("captchaToken") || ""),
+      captchaAnswer: String(formData.get("captchaAnswer") || "")
     };
 
     const response = await fetch("/api/inquiries", {
@@ -28,6 +33,7 @@ export function InquiryForm({ interest = "Foundry machinery project" }: { intere
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
+    setCaptchaRefreshKey((key) => key + 1);
 
     if (response.ok) {
       setState("success");
@@ -60,6 +66,7 @@ export function InquiryForm({ interest = "Foundry machinery project" }: { intere
           placeholder="Tell us about the casting type, expected output, workshop layout, preferred automation level, and destination country."
         />
       </label>
+      <InquiryCaptchaField refreshKey={captchaRefreshKey} />
       <button
         type="submit"
         disabled={state === "submitting"}

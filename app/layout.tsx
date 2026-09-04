@@ -58,6 +58,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
+        {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_TENANT_ID && (
+          <script
+            async
+            src={`https://admin.globle-trade.com/api/public/analytics.js?tenantId=${encodeURIComponent(process.env.NEXT_PUBLIC_TENANT_ID)}`}
+          />
+        )}
       </body>
     </html>
   );
